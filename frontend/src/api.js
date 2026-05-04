@@ -1,5 +1,5 @@
 // For Option B: Frontend on Firebase, Backend on Render
-const RENDER_BACKEND_URL = 'https://your-backend-service.onrender.com'; // Change this after deploying to Render
+const RENDER_BACKEND_URL = 'https://node-js-backend-3l5m.onrender.com';
 
 const API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
     ? 'http://localhost:5000/api' 

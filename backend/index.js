@@ -79,14 +79,18 @@ const path = require('path');
 app.use(cors());
 app.use(express.json());
 
-// Serve static frontend in production
+// Serve static frontend in production (only if dist folder exists)
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/dist')));
-    app.get('*', (req, res) => {
-        if (!req.path.startsWith('/api')) {
-            res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
-        }
-    });
+    const fs = require('fs');
+    const distPath = path.join(__dirname, '../frontend/dist');
+    if (fs.existsSync(distPath)) {
+        app.use(express.static(distPath));
+        app.get('*', (req, res) => {
+            if (!req.path.startsWith('/api')) {
+                res.sendFile(path.join(distPath, 'index.html'));
+            }
+        });
+    }
 }
 
 const authenticate = (req, res, next) => {
